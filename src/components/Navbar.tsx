@@ -14,7 +14,7 @@ const NavWrapper = styled.nav`
 `;
 
 const Logo = styled.h1`
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   margin: 0;
 `;
@@ -25,9 +25,11 @@ interface NavbarProps {
 
 const Navbar: FunctionComponent<NavbarProps> = ({ name }) => {
   return (
-    <NavWrapper>
-      <Logo>{name}</Logo>
-    </NavWrapper>
+    <header>
+      <NavWrapper>
+        <Logo>{name}</Logo>
+      </NavWrapper>
+    </header>
   );
 };
 
