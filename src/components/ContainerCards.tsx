@@ -4,11 +4,13 @@ import styled from "styled-components";
 
 const ContainerCards = styled.div`
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 24px;
-    max-width: 1400px;
+    gap: ${({ theme }) => theme.spacing.large};
+    padding: ${({ theme }) => theme.spacing.large};
+    max-width: 1320px;
     margin: 0 auto;
+
     @media (min-width: 500px){
         grid-template-columns: repeat(2, 1fr);
     }
@@ -19,6 +21,10 @@ const ContainerCards = styled.div`
 
     @media (min-width: 1200px){
         grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (min-width: 1600px) {
+        grid-template-columns: repeat(5, 1fr);
     }
 `;
 

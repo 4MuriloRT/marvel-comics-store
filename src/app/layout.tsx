@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Providers>
-          <Navbar name={"Marvel Comics"} />
+          <Navbar/>
           {children}
         </Providers>
       </body>

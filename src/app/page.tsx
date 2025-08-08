@@ -19,6 +19,7 @@ export default async function Home() {
             <Card
               key={comic.id}
               title={comic.title}
+              price={comic.price}
               imageUrl={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`}
             />
           ))}
