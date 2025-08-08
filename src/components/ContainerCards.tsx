@@ -9,7 +9,6 @@ const ContainerCards = styled.div`
     padding: 24px;
     max-width: 1400px;
     margin: 0 auto;
-
     @media (min-width: 500px){
         grid-template-columns: repeat(2, 1fr);
     }
