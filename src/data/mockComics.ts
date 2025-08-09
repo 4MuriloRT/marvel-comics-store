@@ -2,13 +2,14 @@ export type Comic = {
     id: number;
     title: string;
     price: string;
+    isRare?: boolean;
     thumbnail: {
       path: string;
       extension: string;
     };
   };
   
-  export const mockComics: Comic[] = [
+  export const mockComics: Omit<Comic, 'isRare'>[] = [
     {
       id: 1,
       title: "GODZILLA VS. SPIDER-MAN (2025) #1",

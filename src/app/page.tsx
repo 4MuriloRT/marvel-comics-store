@@ -18,8 +18,10 @@ export default async function Home() {
           {comics.map((comic) => (
             <Card
               key={comic.id}
+              id={comic.id}
               title={comic.title}
               price={comic.price}
+              isRare={comic.isRare}
               imageUrl={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`}
             />
           ))}
