@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Comic Central - Sua Loja Virtual de HQs da Marvel
 
-## Getting Started
+Bem-vindo ao Comic Central! Este projeto é uma loja virtual moderna e responsiva para fãs de quadrinhos da Marvel, desenvolvida como solução para o desafio de front-end da NeoApp.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Sobre o Projeto
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O objetivo foi criar uma experiência de e-commerce fluida e agradável, permitindo aos usuários explorar, visualizar e comprar HQs da Marvel. A aplicação consome a API oficial da Marvel para obter dados em tempo real sobre os quadrinhos.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### A Jornada: Lidando com a Instabilidade da API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Durante uma fase crucial do desenvolvimento, a **API oficial da Marvel ficou instável e inacessível**. Para não interromper o progresso, a estratégia adotada foi desacoplar o front-end da dependência direta da API:
 
-## Learn More
+1.  **Criação de Dados Mockados:** Foi criado um conjunto de dados fictícios (`mock data`) que espelhava a estrutura de resposta da API. Isso permitiu que o desenvolvimento da interface e das funcionalidades do carrinho continuasse normalmente.
+2.  **Camada de Abstração:** A função de busca (`getComics`) foi adaptada para servir esses dados mockados. A interface do usuário dependia apenas da "forma" dos dados (nossos tipos definidos), e não da sua origem.
+3.  **Reconexão Transparente:** Uma vez que a API voltou a funcionar, a camada de abstração foi reconfigurada para fazer as chamadas reais. Como os componentes já esperavam os dados no formato correto, nenhuma alteração na UI foi necessária.
 
-To learn more about Next.js, take a look at the following resources:
+Essa abordagem garantiu a resiliência do processo de desenvolvimento e demonstrou a importância de arquiteturas que não são rigidamente acopladas a serviços externos.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Funcionalidades Implementadas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-   **Listagem com "Carregar Mais":** A página inicial apresenta os quadrinhos e permite carregar mais itens sob demanda, utilizando o sistema de `offset` da API.
+-   **Feedback de Carregamento e Erro:** A interface exibe *skeletons* enquanto os dados estão sendo buscados e uma mensagem amigável caso a API falhe ou não retorne resultados.
+-   **HQs Raras:** 10% dos quadrinhos são marcados como "Raros", com um destaque visual especial nos cards.
+-   **Página de Detalhes:** Uma página dedicada para cada HQ, com imagem em destaque, descrição, preço e a opção de adicionar ao carrinho.
+-   **Carrinho de Compras Completo:** Gerenciamento de estado global com React Context, permitindo adicionar, remover e alterar a quantidade dos itens.
+-   **Sistema de Cupons:** Funcionalidade na página do carrinho para aplicar cupons de desconto, com regras específicas para itens comuns e raros.
 
-## Deploy on Vercel
+## 🛠️ Tecnologias Utilizadas
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   **Next.js:** Para uma base robusta com renderização no servidor (SSR), componentes de cliente e otimizações de performance.
+-   **React & TypeScript:** Para a construção de componentes seguros, reutilizáveis e com tipagem forte.
+-   **Styled Components:** Para a estilização componentizada e criação de um sistema de design coeso através de um `theme`.
+-   **ESLint:** Para garantir a qualidade e a padronização do código.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚙️ Como Rodar o Projeto Localmente
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/4MuriloRT/marvel-comics-store.git](https://github.com/4MuriloRT/marvel-comics-store.git)
+    cd marvel-comics-store
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure as Variáveis de Ambiente:**
+    -   Crie um arquivo `.env.local` na raiz do projeto.
+    -   Adicione suas chaves da API da Marvel:
+        ```env
+        NEXT_PUBLIC_MARVEL_API_PUBLIC_KEY="sua_chave_publica"
+        NEXT_PUBLIC_MARVEL_API_PRIVATE_KEY="sua_chave_privada"
+        ```
+
+4.  **Autorize o `localhost`:**
+    -   No seu [painel de desenvolvedor da Marvel](https://developer.marvel.com/account), adicione `localhost` à lista de domínios autorizados para sua chave de API para evitar erros de `Referer`.
+
+5.  **Rode o servidor de desenvolvimento:**
+    ```bash
+    npm run dev
+    ```
+
+Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
+
+---
+
+## 🎟️ Cupons de Desconto Válidos
+
+Para testar a funcionalidade do carrinho, utilize os seguintes cupons:
+
+-   **`COMMON10`**: 10% de desconto em HQs comuns.
+-   **`RARE15`**: 15% de desconto em HQs raras.
