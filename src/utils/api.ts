@@ -18,25 +18,27 @@ const getApiParams = () => {
 };
 
 
-export const getComics = async (): Promise<Comic[]> => {
-  const url = `${API_BASE_URL}/comics?${getApiParams()}&limit=20&orderBy=-focDate`;
-
+export const getComics = async ({ limit = 20, offset = 0 }): Promise<Comic[]> => {
+  const url = `${API_BASE_URL}/comics?${getApiParams()}&limit=${limit}&offset=${offset}&orderBy=-focDate`;
+  
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
     const data = await response.json();
 
-    const formattedComics: Comic[] = data.data.results.map((apiComic: ApiComic) => {
-      const printPrice = apiComic.prices.find((p) => p.type === 'printPrice')?.price || 9.99;
-      return {
-        id: apiComic.id,
-        title: apiComic.title,
-        description: apiComic.description,
-        price: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(printPrice),
-        isRare: Math.random() < 0.1,
-        thumbnail: apiComic.thumbnail,
-      };
-    });
+    const formattedComics: Comic[] = data.data.results
+      .filter((apiComic: ApiComic) => apiComic.prices.find(p => p.type === 'printPrice')?.price > 0)
+      .map((apiComic: ApiComic) => {
+        const printPrice = apiComic.prices.find((p) => p.type === 'printPrice')?.price || 0;
+        return {
+          id: apiComic.id,
+          title: apiComic.title,
+          description: apiComic.description,
+          price: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(printPrice),
+          isRare: (apiComic.id % 10) < 1, 
+          thumbnail: apiComic.thumbnail,
+        };
+      });
     return formattedComics;
   } catch (error) {
     console.error("Falha ao buscar os quadrinhos:", error);
