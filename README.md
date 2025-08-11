@@ -37,7 +37,7 @@ Essa abordagem garantiu a resiliência do processo de desenvolvimento e demonstr
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/4MuriloRT/marvel-comics-store.git](https://github.com/4MuriloRT/marvel-comics-store.git)
+    git clone [https://github.com/4MuriloRT/marvel-comics-store.git](https://github.com/4MuriloRT/marvel-comics-store)
     cd marvel-comics-store
     ```
 
